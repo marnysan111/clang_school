@@ -23,7 +23,7 @@ int main(void) {
     insert(4,20);
 
     for (p = head.next; p!=NULL; p = p->next){
-        printf("hello222\n");
+        //printf("hello222\n");
         printf("Key: %d, Value: %d\n", p->key, p->data);   
     }
 
@@ -51,15 +51,15 @@ int insert(int key, int data) {
     while (p -> next != NULL)
         p = p->next;
     //printf("%d,%d\n",key,data);
-    x -> key = key;
+    x->key = key;
     //printf("%d\n", x->key);
-    x -> data = data;
+    x->data = data;
     //printf("%d\n", x->data);
-    x -> next = p -> next;
+    x->next = p->next;
 
-    p -> next = p -> next;
-    printf("insert\n");
-    printf("%d,%d\n", x->key , x->data);
+    p->next = x;
+    //printf("insert\n");
+    //printf("%d,%d\n", x->key , x->data);
     return 0;
 }
 
