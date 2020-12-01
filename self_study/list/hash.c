@@ -89,6 +89,7 @@ int delete(int key) {
 
 
 int main() {
+    CELL *p;
     init();
 
     insert(2,20);
@@ -99,6 +100,9 @@ int main() {
     insert(8,80);
 
     printf("Key:3, Data: %d\n", *find(3));
+
+    printf("key: %d, Data: %d\n", table[2]->key, table[2]->data);
+    printf("key: %d, Data: %d\n", table[2]->next->key, table[2]->next->data);
 
 
     return 0;
