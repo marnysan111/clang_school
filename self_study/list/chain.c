@@ -64,7 +64,6 @@ int insert (int key, int *data) {
     p -> data = *data;
     p -> next = table[h];
     table[h] = p;
-    printf("%d,%d,%d,%d\n", p->key, p->data,p->next,table[h]);
     return 1;
 }
 
@@ -100,16 +99,11 @@ int main(){
     int b = 200;
     insert(1,&a);
     insert(1, &b);
-
-
-    /*
-    insert(2,20);
-    insert(13,35);
-    insert(3,33);
-    insert(5,50);
-
-    delete(3);
-*/
-    printf("%d\n",table[1]->next->data);
+    insert(2,&b);
+    insert(3, &a);
+    printf("%d\n",table[2]->data);
+    delete(2);
+    printf("%d\n", table[1]->data);
+    printf("%d\n",table[2]->data);
     return 0;
 }
