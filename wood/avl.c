@@ -18,7 +18,7 @@ int height(NODE *p);
 int getBalance(NODE *p);
 int max(int a, int b);
 
-void *root = NULL;
+NODE *root = NULL;
 
 int keyequal(int a, int b) {
     if (a==b)
@@ -90,12 +90,73 @@ NODE *insert(NODE **node, int key) {
         return new;
     }
     else if (keylt(key, (*p)->data))
-        (*p)->left = insert(&(*p)->left, key)
+        (*p)->left = insert(&(*p)->left, key);
     else if (!keylt(key, (*p)->data))
-        (*p)->right = insert(&(*p)->right, key)
+        (*p)->right = insert(&(*p)->right, key);
     else
         return *node;
+
+    (*node)->height = 1 + max(height((*node)->left), height((*node)->right));
+    balance = getBalance(*node);
+
+    if (balance > 1 && key < (*node)->left->data) {
+        return rightRotate(&(*node));
+    }
+
+    if (balance > 1 && key > (*node)->left->data){
+        (*node)->left = leftRotate(&(*node)->left);
+        return rightRotate(&(*node));
+    }
+
+    return *node;
 }
 
+void preorder (NODE *p) {
+    if (p==NULL)
+        return;
+    printf("%d\n", p->data);
+    preorder(p->left);
+    preorder(p->right);
+}
 
+void inorder(NODE *p) {
+    if (p == NULL)
+        return;
+    inorder(p->left);
+    printf("%d\n", p->data);
+    inorder(p->right);
+}
+
+NODE *rightRotate(NODE **y) {
+    NODE *x, *t;
+    x = (*y) -> right;
+
+    t = x->right;
+    x->right = (*y);
+    (*y)->left = t;
+    (*y)->height=max(height((*y)->left), height((*y)->right)) + 1;
+    x -> height = max(height(x->left), height(x->right)) + 1;
+
+    return x;
+}
+
+NODE *leftRotate(NODE **y) {
+    NODE *x = NULL;
+    return x;
+}
+
+int main(void) {
+    root = insert(&root, 5);
+    root = insert(&root, 4);
+    root = insert(&root, 3);
+    root = insert(&root, 2);
+    root = insert(&root, 1);
+
+    inorder(root);
+    printf("\n");
+
+    preorder(root);
+
+    return 0;
+} 
 
